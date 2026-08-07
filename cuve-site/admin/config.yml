@@ -1,0 +1,108 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/cuve-website   # ← 여기를 수정하세요
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+editor:
+  preview: false
+
+collections:
+
+  - name: "reels"
+    label: "🎬 쇼릴 관리"
+    files:
+      - label: "쇼릴 목록"
+        name: "reels"
+        file: "data/reels.json"
+        fields:
+          - label: "쇼릴 목록"
+            name: "reels"
+            widget: "list"
+            summary: "{{fields.year}}년 쇼릴"
+            fields:
+              - { label: "연도", name: "year", widget: "number", value_type: "int" }
+              - { label: "유튜브 영상 ID", name: "youtubeId", widget: "string",
+                  hint: "유튜브 URL의 마지막 코드. 예: https://youtu.be/[이부분]" }
+
+  - name: "works"
+    label: "🎨 작품 관리"
+    files:
+      - label: "작품 목록"
+        name: "works"
+        file: "data/works.json"
+        fields:
+          - label: "작품 목록"
+            name: "works"
+            widget: "list"
+            summary: "[{{fields.type}}] [{{fields.category}}] {{fields.title}}"
+            fields:
+              - { label: "ID (고유 번호)", name: "id", widget: "number", value_type: "int",
+                  hint: "기존 번호와 겹치지 않게 입력하세요" }
+
+              - { label: "작품 제목", name: "title", widget: "string" }
+
+              - label: "타입"
+                name: "type"
+                widget: "select"
+                default: "video"
+                hint: "영상이면 video, 사진/스틸컷이면 still 선택"
+                options:
+                  - { label: "🎬 영상 (YouTube 링크)", value: "video" }
+                  - { label: "🖼 스틸컷 (이미지 업로드)", value: "still" }
+
+              - label: "카테고리"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Media Arts", value: "Media Arts" }
+                  - { label: "Commercial",  value: "Commercial" }
+                  - { label: "Animation",   value: "Animation" }
+                  - { label: "AR/VR",       value: "AR/VR" }
+                  - { label: "A.i",         value: "A.i" }
+                  - { label: "LiveAction",  value: "LiveAction" }
+
+              - { label: "제작 연도", name: "year", widget: "number", value_type: "int" }
+
+              # ── 영상 전용 ──────────────────────
+              - label: "유튜브 영상 ID"
+                name: "youtubeId"
+                widget: "string"
+                required: false
+                default: ""
+                hint: "타입이 '영상'일 때만 입력. 예: https://youtu.be/[이부분]"
+
+              # ── 공통 썸네일 ────────────────────
+              - label: "대표 썸네일 이미지"
+                name: "thumbnail"
+                widget: "image"
+                required: false
+                hint: "비워두면 — 영상: 유튜브 썸네일 자동 사용 / 스틸: 첫 번째 이미지 자동 사용"
+
+              # ── 스틸 전용 ──────────────────────
+              - label: "스틸 이미지 목록"
+                name: "images"
+                widget: "list"
+                required: false
+                default: []
+                hint: "타입이 '스틸컷'일 때만 사용. 이미지를 순서대로 업로드하세요."
+                field:
+                  label: "이미지"
+                  name: "image"
+                  widget: "image"
+
+              - label: "프로젝트 설명 (디스크립션)"
+                name: "description"
+                widget: "text"
+                required: false
+                default: ""
+                hint: "타입이 '스틸컷'일 때 모달 하단에 표시됩니다. 영상 타입은 입력하지 않아도 됩니다."
+
+              # ── 크레딧 ─────────────────────────
+              - { label: "Client",     name: "client",     widget: "string", required: false, default: "—" }
+              - { label: "Agency",     name: "agency",     widget: "string", required: false, default: "—" }
+              - { label: "Production", name: "production", widget: "string", required: false, default: "CUVE" }
+              - { label: "Director",   name: "director",   widget: "string", required: false, default: "—" }
+              - { label: "Sound",      name: "sound",      widget: "string", required: false, default: "—" }

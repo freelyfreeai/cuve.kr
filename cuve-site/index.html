@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUVE — Media Creative Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;700;900&family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
+
+<style>
+  /* ═══════════════════════════════════════════
+     ROOT VARIABLES
+  ═══════════════════════════════════════════ */
+  :root {
+    --bg:         #050505;
+    --bg2:        #0e0e0e;
+    --bg3:        #161616;
+    --text:       #f2f2f2;
+    --text-dim:   #888;
+    --text-muted: #444;
+    --accent:     #c8006b;
+    --accent-hi:  #ff1a8c;
+    --border:     rgba(255,255,255,0.07);
+    --header-h:   64px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─────────────────────────────────────────
+     배경 패턴 레이어 (선택사항 / 기본 꺼짐)
+     사용법은 운영 가이드 "배경 패턴 넣기" 챕터 참고
+     활성화하려면 .bg-pattern 에 opacity 값을 0 이상으로 변경
+  ───────────────────────────────────────── */
+  #bg-pattern {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* background-image: url('/images/pattern.png'); */
+    background-repeat: repeat;
+    background-size: 500px 500px; /* 패턴 이미지 1개의 크기와 맞추세요 */
+    opacity: 0; /* 0 = 꺼짐, 0.05~0.15 권장 */
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; background: none; border: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ═══════════════════════════════════════════
+     HEADER
+  ═══════════════════════════════════════════ */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    background: rgba(5,5,5,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    position: absolute;
+    left: 40px;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+  .logo:hover { opacity: 0.7; }
+  .logo-dot { color: var(--accent); }
+
+  nav { display: flex; gap: 36px; }
+
+  .nav-link {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color 0.25s;
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--text); }
+  .nav-link.active::after { width: 100%; }
+
+  /* ═══════════════════════════════════════════
+     PAGE SYSTEM
+  ═══════════════════════════════════════════ */
+  main { padding-top: var(--header-h); min-height: 100vh; position: relative; z-index: 1; }
+
+  .page { display: none; opacity: 0; }
+  .page.active { display: block; animation: pageIn 0.45s ease forwards; }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════════════
+     ABOUT / HOME
+  ═══════════════════════════════════════════ */
+  .about-page { padding: 72px 48px 80px; max-width: 1280px; margin: 0 auto; }
+
+  .reel-hero { margin-bottom: 64px; }
+  .reel-eyebrow {
+    font-size: 11px; letter-spacing: 0.35em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 16px; font-weight: 500;
+  }
+  .reel-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 96px);
+    line-height: 0.92;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+  }
+  .reel-embed { width: 100%; aspect-ratio: 16/9; background: var(--bg3); overflow: hidden; }
+  .reel-embed iframe { width: 100%; height: 100%; border: none; }
+
+  .year-selector {
+    display: flex; align-items: center; margin-top: 20px;
+    border-top: 1px solid var(--border); padding-top: 16px;
+  }
+  .year-label {
+    font-size: 10px; letter-spacing: 0.3em; color: var(--text-muted);
+    text-transform: uppercase; margin-right: 24px;
+  }
+  .year-btn {
+    font-family: 'Syne Mono', monospace; font-size: 13px; color: var(--text-muted);
+    padding: 6px 16px; border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .year-btn:first-of-type { padding-left: 0; }
+  .year-btn.active, .year-btn:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 64px; }
+
+  .section-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent);
+    text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .section-tag::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--accent); }
+
+  .about-body p { font-size: 15px; line-height: 1.85; color: var(--text-dim); margin-bottom: 20px; }
+  .about-body h2 {
+    font-family: 'Big Shoulders Display', sans-serif; font-size: 32px; font-weight: 700;
+    color: var(--text); margin: 32px 0 14px; letter-spacing: 0.04em;
+  }
+
+  .service-list { display: flex; flex-direction: column; gap: 1px; }
+  .service-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 20px; }
+  .service-num { font-family: 'Syne Mono', monospace; font-size: 11px; color: var(--accent); min-width: 32px; margin-top: 2px; }
+  .service-title {
+    font-family: 'Big Shoulders Display', sans-serif; font-size: 22px; font-weight: 700;
+    color: var(--text); letter-spacing: 0.05em; margin-bottom: 4px;
+  }
+  .service-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+  .map-wrap {
+    width: 100%; height: 280px; background: var(--bg3); border: 1px solid var(--border);
+    overflow: hidden; margin-bottom: 48px;
+  }
+  .map-wrap iframe {
+    width: 100%; height: 100%; border: none;
+    filter: grayscale(1) invert(0.88) contrast(0.9) brightness(0.6) hue-rotate(180deg);
+    opacity: 0.85;
+  }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 64px; }
+  .contact-block h4 {
+    font-size: 10px; letter-spacing: 0.3em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
+  }
+  .contact-block p, .contact-block a { font-size: 14px; color: var(--text-dim); line-height: 1.7; transition: color 0.2s; }
+  .contact-block a:hover { color: var(--text); }
+
+  /* ═══════════════════════════════════════════
+     CONTACT US FORM
+  ═══════════════════════════════════════════ */
+  .contact-form-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 48px;
+    margin-top: 8px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    padding: 13px 16px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    background: #1c1c1c;
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; font-family: 'Syne', sans-serif; }
+  .form-group select { cursor: pointer; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+
+  .form-submit {
+    margin-top: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { background: var(--accent-hi); transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .form-status {
+    margin-top: 18px;
+    font-size: 13px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    display: none;
+  }
+  .form-status.show { display: block; }
+  .form-status.success { background: rgba(34,197,94,0.1); color: #4ade80; border-left: 3px solid #22c55e; }
+  .form-status.error { background: rgba(239,68,68,0.1); color: #f87171; border-left: 3px solid #ef4444; }
+
+  /* honeypot field hidden */
+  .hp-field { position: absolute; left: -9999px; opacity: 0; }
+
+  /* ═══════════════════════════════════════════
+     WORKS PAGE
+  ═══════════════════════════════════════════ */
+  .works-page { padding: 48px 48px 80px; max-width: 1280px; margin: 0 auto; }
+
+  .cat-bar {
+    display: flex; align-items: center; margin-bottom: 40px;
+    border-bottom: 1px solid var(--border); overflow-x: auto;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .cat-bar::-webkit-scrollbar { display: none; }
+
+  .cat-btn {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); padding: 14px 20px; border-bottom: 1px solid transparent;
+    margin-bottom: -1px; white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .cat-btn:first-child { padding-left: 0; }
+  .cat-btn.active { color: var(--text); border-bottom-color: var(--accent); }
+  .cat-btn:hover { color: var(--text); }
+
+  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+
+  .work-card { position: relative; overflow: hidden; cursor: pointer; background: var(--bg3); }
+  .work-thumb { width: 100%; height: auto; display: block; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .work-hover {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0) 50%);
+    opacity: 0; transition: opacity 0.35s ease; display: flex; align-items: flex-end; padding: 24px;
+  }
+  .work-card:hover .work-thumb { transform: scale(1.04); }
+  .work-card:hover .work-hover { opacity: 1; }
+  .work-meta { transform: translateY(6px); transition: transform 0.35s ease; }
+  .work-card:hover .work-meta { transform: translateY(0); }
+  .work-cat { font-size: 10px; letter-spacing: 0.25em; color: var(--accent-hi); text-transform: uppercase; margin-bottom: 4px; }
+  .work-name { font-family: 'Big Shoulders Display', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.03em; }
+
+  .empty-state { grid-column: 1/-1; text-align: center; padding: 80px 0; color: var(--text-muted); font-size: 13px; letter-spacing: 0.2em; }
+
+  /* ═══════════════════════════════════════════
+     MODAL
+  ═══════════════════════════════════════════ */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(5,5,5,0.96); z-index: 800;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 40px;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: all; }
+  .modal-inner { width: 100%; max-width: 920px; position: relative; transform: translateY(20px); transition: transform 0.35s ease; }
+  .modal-backdrop.open .modal-inner { transform: translateY(0); }
+  .modal-close-btn {
+    position: absolute; top: -36px; right: 0; font-family: 'Syne Mono', monospace;
+    font-size: 14px; letter-spacing: 0.1em; color: var(--text-dim); transition: color 0.2s;
+  }
+  .modal-close-btn:hover { color: var(--accent-hi); }
+  .modal-video-wrap { width: 100%; aspect-ratio: 16/9; background: #000; }
+  .modal-video-wrap iframe { width: 100%; height: 100%; border: none; }
+  .modal-info {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);
+  }
+  .info-block label {
+    display: block; font-size: 9px; letter-spacing: 0.3em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 600;
+  }
+  .info-block span { font-family: 'Syne Mono', monospace; font-size: 12px; color: var(--text-dim); }
+
+  /* ── GALLERY (still type) ── */
+  .gallery-wrap {
+    position: relative;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    max-height: 560px;
+    overflow: hidden;
+  }
+  .gallery-main-img {
+    width: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    display: block;
+    transition: opacity 0.18s ease;
+  }
+  .gallery-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; font-size: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10;
+    transition: background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .gallery-arrow:hover { background: rgba(200,0,107,0.75); border-color: var(--accent); }
+  .gallery-prev { left: 14px; }
+  .gallery-next { right: 14px; }
+
+  .gallery-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 2px 0;
+  }
+  .gallery-counter {
+    font-family: 'Syne Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.15em;
+  }
+  .gallery-dots { display: flex; gap: 7px; align-items: center; }
+  .gallery-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-muted); cursor: pointer;
+    transition: background 0.2s, transform 0.2s; border: none; padding: 0;
+  }
+  .gallery-dot.active { background: var(--accent); transform: scale(1.4); }
+
+  .gallery-description {
+    margin-top: 20px; font-size: 14px; line-height: 1.8;
+    color: var(--text-dim); white-space: pre-wrap;
+    border-top: 1px solid var(--border); padding-top: 18px;
+    max-height: 140px; overflow-y: auto; padding-right: 6px;
+  }
+  .gallery-description::-webkit-scrollbar { width: 3px; }
+  .gallery-description::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* still 타입 배지 */
+  .work-type-badge {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+    color: #fff; background: rgba(200,0,107,0.82);
+    padding: 3px 8px; border-radius: 2px;
+    backdrop-filter: blur(4px); pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  .site-footer {
+    border-top: 1px solid var(--border); padding: 32px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .footer-logo { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: 0.12em; color: var(--text-muted); }
+  .footer-copy { font-size: 11px; letter-spacing: 0.2em; color: var(--text-muted); }
+
+  /* ═══════════════════════════════════════════
+     LOADER
+  ═══════════════════════════════════════════ */
+  .site-loader {
+    position: fixed; inset: 0; background: var(--bg); z-index: 9000;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s;
+  }
+  .site-loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 48px;
+    letter-spacing: 0.15em; color: var(--text); animation: loaderPulse 0.8s ease-in-out;
+  }
+  .loader-logo span { color: var(--accent); }
+  @keyframes loaderPulse {
+    0%   { opacity: 0; transform: scale(0.94); }
+    60%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 1; }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .logo { left: 24px; font-size: 20px; }
+    .about-page, .works-page, .site-footer { padding-left: 24px; padding-right: 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .modal-info { grid-template-columns: 1fr 1fr; }
+    .modal-backdrop { padding: 20px; }
+    .contact-form-wrap { padding: 28px; }
+    .form-row { grid-template-columns: 1fr; gap: 16px; }
+  }
+  @media (max-width: 640px) {
+    .works-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .modal-info { grid-template-columns: 1fr; }
+    nav { gap: 18px; }
+    .nav-link { font-size: 10px; }
+    .reel-title { font-size: 36px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="bg-pattern"></div>
+
+<!-- ░░ LOADER ░░ -->
+<div class="site-loader" id="loader">
+  <div class="loader-logo">CUVE<span>.</span></div>
+</div>
+
+<!-- ░░ HEADER ░░ -->
+<header>
+  <div class="logo" onclick="showPage('about')" role="button" tabindex="0">
+    CUVE<span class="logo-dot">.</span>
+  </div>
+  <nav>
+    <button class="nav-link active" id="nav-about" onclick="showPage('about')">About</button>
+    <button class="nav-link" id="nav-works" onclick="showPage('works')">Works</button>
+    <button class="nav-link" id="nav-contact" onclick="goToContact()">Contact Us</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ░░░░ ABOUT PAGE ░░░░ -->
+  <div class="page active" id="page-about">
+    <div class="about-page">
+
+      <!-- REEL HERO -->
+      <section class="reel-hero">
+        <p class="reel-eyebrow">Showreel</p>
+        <h1 class="reel-title" id="reel-title">2026 CUVE<br>MONTAGE REEL</h1>
+        <div class="reel-embed">
+          <iframe id="reel-iframe" src="" title="CUVE Montage Reel"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <div class="year-selector">
+          <span class="year-label">Archive</span>
+          <div id="year-btn-wrap"></div>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- ABOUT GRID -->
+      <section class="about-grid">
+        <div class="about-body">
+          <p class="section-tag">About CUVE</p>
+          <p>큐브(CUVE)는 모션그래픽 디자인, 미디어아트, AI 컨텐츠를 전문으로 제작하는 크리에이티브 그룹입니다.</p>
+          <p>브랜드 아이덴티티부터 대형 미디어 파사드, AI 생성 영상까지 — 시각 언어로 경험을 설계하는 것이 우리의 사명입니다.</p>
+          <p>기술과 예술이 교차하는 지점에서 독창적인 시각 경험을 만들어내며, 모션·AI·인터랙션 전 영역을 아우르는 종합 미디어 크리에이티브 스튜디오입니다.</p>
+          <h2>Media Creative Group</h2>
+          <p>CUVE는 단순한 제작사를 넘어 콘텐츠의 기획에서 실행까지 전 과정을 디렉팅합니다. 클라이언트의 메시지를 강렬하고 기억에 남는 시각적 언어로 변환합니다.</p>
+        </div>
+
+        <div>
+          <p class="section-tag">What We Do</p>
+          <div class="service-list">
+            <div class="service-item">
+              <span class="service-num">01</span>
+              <div>
+                <div class="service-title">Motion Graphics</div>
+                <div class="service-desc">브랜드 필름 · 방송 디자인 · 광고 영상 · 타이틀 시퀀스</div>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="service-num">02</span>
+              <div>
+                <div class="service-title">Media Art</div>
+                <div class="service-desc">미디어 파사드 · 인터랙티브 설치 · 몰입형 공간 경험</div>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="service-num">03</span>
+              <div>
+                <div class="service-title">A.I. Contents</div>
+                <div class="service-desc">AI 영상 생성 · 제너러티브 아트 · AI 디렉팅</div>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="service-num">04</span>
+              <div>
+                <div class="service-title">AR / VR</div>
+                <div class="service-desc">증강현실 콘텐츠 · XR 경험 · 버추얼 프로덕션</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- ════════════════════════════════════
+           CONTACT 영역 시작 (지도 + 연락처 + 문의폼)
+           네비게이션의 "Contact Us" 클릭 시 이 지점으로 스크롤됩니다.
+      ════════════════════════════════════ -->
+      <section id="contact-us">
+
+        <!-- MAP -->
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.5!2d126.9780!3d37.5665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDMzJzU5LjQiTiAxMjbCsDU4JzQwLjgiRQ!5e0!3m2!1sko!2skr!4v1"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div style="margin-bottom: 64px;">
+          <p class="section-tag">Contact</p>
+          <div class="contact-grid">
+            <div class="contact-block">
+              <h4>Address</h4>
+              <p>서울특별시 ___구 ___로 ___</p>
+            </div>
+            <div class="contact-block">
+              <h4>Project Inquiries</h4>
+              <a href="mailto:hello@cuve.kr">hello@cuve.kr</a>
+            </div>
+            <div class="contact-block">
+              <h4>Tel</h4>
+              <p>+82 (0) 000-0000</p>
+            </div>
+            <div class="contact-block">
+              <h4>SNS</h4>
+              <a href="https://www.youtube.com/@CUVE" target="_blank">YouTube</a><br>
+              <a href="https://www.instagram.com/cuve_official" target="_blank">Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 문의 폼 -->
+        <p class="section-tag">Get In Touch</p>
+        <h2 style="font-family:'Big Shoulders Display'; font-size:32px; font-weight:700; margin-bottom:12px; letter-spacing:0.04em;">
+          프로젝트를 시작해 보세요
+        </h2>
+        <p style="font-size:14px; color:var(--text-dim); margin-bottom:32px; max-width:560px;">
+          제작 의뢰, 협업 제안, 그 외 궁금한 점이 있다면 아래 양식을 작성해 주세요.
+          빠른 시일 내에 입력하신 이메일로 회신드리겠습니다.
+        </p>
+
+        <div class="contact-form-wrap">
+          <!--
+            ★ Netlify Forms 사용 ★
+            data-netlify="true" 속성만으로 백엔드 서버 없이 폼 제출이 가능합니다.
+            제출된 내용은 Netlify 대시보드 → Forms 탭에서 확인하거나
+            이메일로 알림을 받도록 설정할 수 있습니다. (운영가이드 Ch.14 참고)
+          -->
+          <form
+            id="contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onsubmit="handleFormSubmit(event)"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hp-field">
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-name">이름 / 회사명 *</label>
+                <input type="text" id="f-name" name="name" placeholder="홍길동 / ㈜브랜드명" required>
+              </div>
+              <div class="form-group">
+                <label for="f-email">이메일 *</label>
+                <input type="email" id="f-email" name="email" placeholder="you@company.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-phone">연락처</label>
+                <input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000">
+              </div>
+              <div class="form-group">
+                <label for="f-category">문의 종류 *</label>
+                <select id="f-category" name="category" required>
+                  <option value="" disabled selected>선택해 주세요</option>
+                  <option value="Motion Graphics">Motion Graphics</option>
+                  <option value="Media Art">Media Art</option>
+                  <option value="A.I. Contents">A.I. Contents</option>
+                  <option value="AR/VR">AR / VR</option>
+                  <option value="Collaboration">협업 제안</option>
+                  <option value="Other">기타 문의</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="f-message">문의 내용 *</label>
+                <textarea id="f-message" name="message" placeholder="프로젝트 개요, 일정, 예산 등을 자유롭게 작성해 주세요." required></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="form-submit" id="form-submit-btn">Send Message</button>
+
+            <div class="form-status" id="form-status"></div>
+          </form>
+        </div>
+      </section>
+
+    </div>
+    <footer class="site-footer">
+      <div class="footer-logo">CUVE.</div>
+      <span class="footer-copy">© <span class="copy-year">2026</span> CUVE. ALL RIGHTS RESERVED.</span>
+    </footer>
+  </div>
+
+  <!-- ░░░░ WORKS PAGE ░░░░ -->
+  <div class="page" id="page-works">
+    <div class="works-page">
+      <div class="cat-bar" id="cat-bar"></div>
+      <div class="works-grid" id="works-grid"></div>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-logo">CUVE.</div>
+      <span class="footer-copy">© <span class="copy-year">2026</span> CUVE. ALL RIGHTS RESERVED.</span>
+    </footer>
+  </div>
+
+</main>
+
+<!-- ░░ MODAL ░░ -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="modal-inner">
+    <button class="modal-close-btn" onclick="closeModal()">✕ CLOSE</button>
+
+    <!-- ── 영상 모드 (YouTube) ── -->
+    <div id="modal-video-section">
+      <div class="modal-video-wrap">
+        <iframe id="modal-iframe" src="" title="CUVE Work"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- ── 스틸 모드 (이미지 갤러리) ── -->
+    <div id="modal-still-section" style="display:none">
+      <div class="gallery-wrap">
+        <button class="gallery-arrow gallery-prev" onclick="galleryNav(-1)">&#8592;</button>
+        <img id="gallery-main-img" src="" alt="" class="gallery-main-img">
+        <button class="gallery-arrow gallery-next" onclick="galleryNav(1)">&#8594;</button>
+      </div>
+      <div class="gallery-footer">
+        <span class="gallery-counter">
+          <span id="gallery-cur">1</span> / <span id="gallery-tot">1</span>
+        </span>
+        <div class="gallery-dots" id="gallery-dots"></div>
+      </div>
+      <div class="gallery-description" id="gallery-description" style="display:none"></div>
+    </div>
+
+    <!-- ── 크레딧 (공통) ── -->
+    <div class="modal-info">
+      <div class="info-block"><label>Client</label><span id="m-client">—</span></div>
+      <div class="info-block"><label>Agency</label><span id="m-agency">—</span></div>
+      <div class="info-block"><label>Production</label><span id="m-production">—</span></div>
+      <div class="info-block"><label>Director</label><span id="m-director">—</span></div>
+      <div class="info-block"><label>Sound</label><span id="m-sound">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ★ Netlify Forms 감지용 정적 폼 (화면에 보이지 않음, 빌드시 자동 인식용) ★ -->
+<form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="tel" name="phone" />
+  <input type="text" name="category" />
+  <textarea name="message"></textarea>
+</form>
+
+<script>
+/* ─────────────────────────────────────────────
+   CATEGORIES
+───────────────────────────────────────────── */
+const CATEGORIES = ["All","Media Arts","Commercial","Animation","AR/VR","A.i","LiveAction"];
+
+let REEL_DATA = [];
+let WORKS_DATA = [];
+let currentCategory = "All";
+
+/* ─────────────────────────────────────────────
+   DATA FETCH
+───────────────────────────────────────────── */
+async function loadData() {
+  try {
+    const [reelsRes, worksRes] = await Promise.all([
+      fetch('/data/reels.json?v=' + Date.now()),
+      fetch('/data/works.json?v=' + Date.now())
+    ]);
+    const reelsData = await reelsRes.json();
+    const worksData = await worksRes.json();
+    REEL_DATA  = reelsData.reels  || [];
+    WORKS_DATA = worksData.works  || [];
+  } catch (e) {
+    console.warn('JSON 로드 실패 — 기본 데이터 사용:', e);
+    REEL_DATA  = [{ year: 2026, youtubeId: "dQw4w9WgXcQ" }];
+    WORKS_DATA = [];
+  }
+}
+
+/* ─────────────────────────────────────────────
+   PAGE NAVIGATION
+───────────────────────────────────────────── */
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+  const target = document.getElementById('page-' + pageId);
+  if (!target) return;
+  target.style.display = 'block';
+  target.offsetHeight;
+  target.classList.add('active');
+
+  const nav = document.getElementById('nav-' + pageId);
+  if (nav) nav.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToContact() {
+  showPage('about');
+  setTimeout(() => {
+    const el = document.getElementById('contact-us');
+    if (el) {
+      const headerOffset = 64;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }, 120);
+}
+
+/* ─────────────────────────────────────────────
+   REEL
+───────────────────────────────────────────── */
+function buildReelSection() {
+  const sorted = [...REEL_DATA].sort((a, b) => b.year - a.year);
+  if (sorted.length > 0) setReel(sorted[0]);
+
+  const wrap = document.getElementById('year-btn-wrap');
+  wrap.innerHTML = '';
+  sorted.forEach((reel, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'year-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = reel.year;
+    btn.onclick = () => {
+      document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setReel(reel);
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function setReel(reel) {
+  document.getElementById('reel-title').innerHTML = reel.year + ' CUVE<br>MONTAGE REEL';
+  document.getElementById('reel-iframe').src =
+    `https://www.youtube.com/embed/${reel.youtubeId}?rel=0&color=white&modestbranding=1`;
+}
+
+/* ─────────────────────────────────────────────
+   WORKS
+───────────────────────────────────────────── */
+function buildCatFilter() {
+  const bar = document.getElementById('cat-bar');
+  bar.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (cat === 'All' ? ' active' : '');
+    btn.textContent = cat;
+    btn.onclick = () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = cat;
+      renderWorksGrid();
+    };
+    bar.appendChild(btn);
+  });
+}
+
+function renderWorksGrid() {
+  const grid = document.getElementById('works-grid');
+  const filtered = currentCategory === 'All'
+    ? WORKS_DATA
+    : WORKS_DATA.filter(w => w.category === currentCategory);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">NO WORKS IN THIS CATEGORY YET</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(work => {
+    const isStill = work.type === 'still';
+    const thumb = work.thumbnail && work.thumbnail.trim() !== ''
+      ? work.thumbnail
+      : isStill && work.images && work.images.length > 0
+        ? work.images[0]
+        : `https://img.youtube.com/vi/${work.youtubeId}/maxresdefault.jpg`;
+
+    const badge = isStill
+      ? `<div class="work-type-badge">STILL</div>`
+      : '';
+
+    const onerrorFallback = isStill
+      ? `this.style.background='#161616'`
+      : `this.src='https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg'`;
+
+    return `
+      <div class="work-card" onclick="openModal(${work.id})" role="button" tabindex="0">
+        <img class="work-thumb" src="${thumb}" alt="${work.title}" loading="lazy"
+          onerror="${onerrorFallback}">
+        ${badge}
+        <div class="work-hover">
+          <div class="work-meta">
+            <div class="work-cat">${work.category}</div>
+            <div class="work-name">${work.title}</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ─────────────────────────────────────────────
+   MODAL
+───────────────────────────────────────────── */
+let galleryImages = [];
+let galleryIndex  = 0;
+
+function openModal(id) {
+  const work = WORKS_DATA.find(w => w.id === id);
+  if (!work) return;
+
+  const type = work.type || 'video';
+  const videoSection = document.getElementById('modal-video-section');
+  const stillSection = document.getElementById('modal-still-section');
+
+  if (type === 'still') {
+    videoSection.style.display = 'none';
+    stillSection.style.display = 'block';
+    initGallery(work.images || []);
+    const descEl = document.getElementById('gallery-description');
+    if (work.description && work.description.trim()) {
+      descEl.textContent = work.description;
+      descEl.style.display = 'block';
+    } else {
+      descEl.style.display = 'none';
+    }
+  } else {
+    videoSection.style.display = 'block';
+    stillSection.style.display = 'none';
+    document.getElementById('modal-iframe').src =
+      `https://www.youtube.com/embed/${work.youtubeId}?autoplay=1&rel=0&color=white&modestbranding=1`;
+  }
+
+  document.getElementById('m-client').textContent     = work.client     || '—';
+  document.getElementById('m-agency').textContent     = work.agency     || '—';
+  document.getElementById('m-production').textContent = work.production || '—';
+  document.getElementById('m-director').textContent   = work.director   || '—';
+  document.getElementById('m-sound').textContent      = work.sound      || '—';
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-backdrop').classList.remove('open');
+  setTimeout(() => { document.getElementById('modal-iframe').src = ''; }, 300);
+  document.body.style.overflow = '';
+  galleryImages = [];
+  galleryIndex  = 0;
+}
+
+/* ─────────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────────── */
+function initGallery(images) {
+  galleryImages = images || [];
+  galleryIndex  = 0;
+  const total   = galleryImages.length;
+
+  document.getElementById('gallery-tot').textContent = total;
+
+  // dots
+  const dotsEl = document.getElementById('gallery-dots');
+  dotsEl.innerHTML = total > 1
+    ? galleryImages.map((_, i) =>
+        `<button class="gallery-dot${i === 0 ? ' active' : ''}" onclick="setGallerySlide(${i})"></button>`
+      ).join('')
+    : '';
+
+  // hide arrows if single image
+  const prev = document.querySelector('.gallery-prev');
+  const next = document.querySelector('.gallery-next');
+  prev.style.display = total > 1 ? 'flex' : 'none';
+  next.style.display = total > 1 ? 'flex' : 'none';
+
+  setGallerySlide(0, true);
+}
+
+function setGallerySlide(index, instant) {
+  if (galleryImages.length === 0) return;
+  if (index < 0) index = galleryImages.length - 1;
+  if (index >= galleryImages.length) index = 0;
+  galleryIndex = index;
+
+  const img = document.getElementById('gallery-main-img');
+  if (instant) {
+    img.src = galleryImages[index];
+  } else {
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = galleryImages[index];
+      img.style.opacity = '1';
+    }, 160);
+  }
+
+  document.getElementById('gallery-cur').textContent = index + 1;
+  document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+function galleryNav(dir) { setGallerySlide(galleryIndex + dir); }
+function handleBackdropClick(e) { if (e.target.id === 'modal-backdrop') closeModal(); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  const isOpen = document.getElementById('modal-backdrop').classList.contains('open');
+  if (isOpen && galleryImages.length > 1) {
+    if (e.key === 'ArrowLeft')  galleryNav(-1);
+    if (e.key === 'ArrowRight') galleryNav(1);
+  }
+});
+
+/* ─────────────────────────────────────────────
+   CONTACT FORM SUBMIT (Netlify Forms / AJAX)
+───────────────────────────────────────────── */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contact-form');
+  const btn = document.getElementById('form-submit-btn');
+  const status = document.getElementById('form-status');
+  const data = new FormData(form);
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => {
+    status.textContent = '문의가 정상적으로 전송되었습니다. 빠르게 회신드리겠습니다.';
+    status.className = 'form-status show success';
+    form.reset();
+  })
+  .catch(() => {
+    status.textContent = '전송 중 오류가 발생했습니다. 잠시 후 다시 시도하거나 이메일로 직접 문의해 주세요.';
+    status.className = 'form-status show error';
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  });
+
+  return false;
+}
+
+/* ─────────────────────────────────────────────
+   INIT
+───────────────────────────────────────────── */
+document.querySelectorAll('.copy-year').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+async function init() {
+  await loadData();
+  buildReelSection();
+  buildCatFilter();
+  renderWorksGrid();
+
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('hidden');
+    setTimeout(() => loader.remove(), 600);
+  }, 900);
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "works": [
+    {
+      "id": 1,
+      "type": "video",
+      "title": "Brand Film — Sample",
+      "category": "Commercial",
+      "year": 2026,
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "images": [],
+      "description": "",
+      "client": "Sample Client",
+      "agency": "—",
+      "production": "CUVE",
+      "director": "—",
+      "sound": "—"
+    },
+    {
+      "id": 2,
+      "type": "video",
+      "title": "Media Facade — Sample",
+      "category": "Media Arts",
+      "year": 2026,
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "images": [],
+      "description": "",
+      "client": "—",
+      "agency": "—",
+      "production": "CUVE",
+      "director": "—",
+      "sound": "—"
+    },
+    {
+      "id": 3,
+      "type": "video",
+      "title": "AI Generative — Sample",
+      "category": "A.i",
+      "year": 2026,
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "images": [],
+      "description": "",
+      "client": "—",
+      "agency": "—",
+      "production": "CUVE",
+      "director": "—",
+      "sound": "—"
+    },
+    {
+      "id": 4,
+      "type": "video",
+      "title": "Animation Short — Sample",
+      "category": "Animation",
+      "year": 2026,
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "images": [],
+      "description": "",
+      "client": "—",
+      "agency": "—",
+      "production": "CUVE",
+      "director": "—",
+      "sound": "—"
+    },
+    {
+      "id": 5,
+      "type": "still",
+      "title": "Brand Identity — Sample (스틸컷 예시)",
+      "category": "Commercial",
+      "year": 2026,
+      "youtubeId": "",
+      "thumbnail": "/images/sample-thumb.jpg",
+      "images": [
+        "/images/sample-01.jpg",
+        "/images/sample-02.jpg",
+        "/images/sample-03.jpg"
+      ],
+      "description": "이 영역에 프로젝트 설명을 입력합니다.\n\n클라이언트의 브랜드 아이덴티티를 재정립하기 위한 프로젝트로, 로고 리뉴얼부터 가이드라인 제작까지 전 과정을 진행했습니다.\n\n어드민 패널에서 이 텍스트를 자유롭게 수정할 수 있습니다.",
+      "client": "Sample Client",
+      "agency": "—",
+      "production": "CUVE",
+      "director": "—",
+      "sound": "—"
+    }
+  ]
+}
