@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: freelyfreeai/cuve-website   # ← 여기를 수정하세요
+  repo: freelyfreeai/cuve.kr   # ← 여기를 수정하세요
   branch: main
 
 media_folder: "images"
