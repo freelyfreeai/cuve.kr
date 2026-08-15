@@ -1,11 +1,10 @@
 backend:
   name: github
-  repo: freelyfreeai/cuve.kr   # ← 여기를 수정하세요
+  repo: YOUR_GITHUB_USERNAME/cuve-website
   branch: main
 
 media_folder: "images"
 public_folder: "/images"
-
 editor:
   preview: false
 
@@ -24,8 +23,7 @@ collections:
             summary: "{{fields.year}}년 쇼릴"
             fields:
               - { label: "연도", name: "year", widget: "number", value_type: "int" }
-              - { label: "유튜브 영상 ID", name: "youtubeId", widget: "string",
-                  hint: "유튜브 URL의 마지막 코드. 예: https://youtu.be/[이부분]" }
+              - { label: "유튜브 ID", name: "youtubeId", widget: "string" }
 
   - name: "works"
     label: "🎨 작품 관리"
@@ -37,72 +35,79 @@ collections:
           - label: "작품 목록"
             name: "works"
             widget: "list"
-            summary: "[{{fields.type}}] [{{fields.category}}] {{fields.title}}"
+            summary: "[{{fields.type}}] {{fields.title}}"
             fields:
-              - { label: "ID (고유 번호)", name: "id", widget: "number", value_type: "int",
-                  hint: "기존 번호와 겹치지 않게 입력하세요" }
-
+              - { label: "ID", name: "id", widget: "number", value_type: "int" }
               - { label: "작품 제목", name: "title", widget: "string" }
-
               - label: "타입"
                 name: "type"
                 widget: "select"
                 default: "video"
-                hint: "영상이면 video, 사진/스틸컷이면 still 선택"
                 options:
-                  - { label: "🎬 영상 (YouTube 링크)", value: "video" }
+                  - { label: "🎬 영상 (YouTube)", value: "video" }
                   - { label: "🖼 스틸컷 (이미지 업로드)", value: "still" }
-
               - label: "카테고리"
                 name: "category"
                 widget: "select"
                 options:
                   - { label: "Media Arts", value: "Media Arts" }
-                  - { label: "Commercial",  value: "Commercial" }
-                  - { label: "Animation",   value: "Animation" }
-                  - { label: "AR/VR",       value: "AR/VR" }
-                  - { label: "A.i",         value: "A.i" }
-                  - { label: "LiveAction",  value: "LiveAction" }
-
+                  - { label: "Commercial", value: "Commercial" }
+                  - { label: "Animation", value: "Animation" }
+                  - { label: "AR/VR", value: "AR/VR" }
+                  - { label: "A.i", value: "A.i" }
+                  - { label: "LiveAction", value: "LiveAction" }
               - { label: "제작 연도", name: "year", widget: "number", value_type: "int" }
-
-              # ── 영상 전용 ──────────────────────
-              - label: "유튜브 영상 ID"
-                name: "youtubeId"
-                widget: "string"
-                required: false
-                default: ""
-                hint: "타입이 '영상'일 때만 입력. 예: https://youtu.be/[이부분]"
-
-              # ── 공통 썸네일 ────────────────────
-              - label: "대표 썸네일 이미지"
-                name: "thumbnail"
-                widget: "image"
-                required: false
-                hint: "비워두면 — 영상: 유튜브 썸네일 자동 사용 / 스틸: 첫 번째 이미지 자동 사용"
-
-              # ── 스틸 전용 ──────────────────────
+              - { label: "유튜브 ID", name: "youtubeId", widget: "string", required: false, default: "" }
+              - { label: "대표 썸네일", name: "thumbnail", widget: "image", required: false }
               - label: "스틸 이미지 목록"
                 name: "images"
                 widget: "list"
                 required: false
                 default: []
-                hint: "타입이 '스틸컷'일 때만 사용. 이미지를 순서대로 업로드하세요."
-                field:
-                  label: "이미지"
-                  name: "image"
-                  widget: "image"
-
-              - label: "프로젝트 설명 (디스크립션)"
-                name: "description"
-                widget: "text"
-                required: false
-                default: ""
-                hint: "타입이 '스틸컷'일 때 모달 하단에 표시됩니다. 영상 타입은 입력하지 않아도 됩니다."
-
-              # ── 크레딧 ─────────────────────────
-              - { label: "Client",     name: "client",     widget: "string", required: false, default: "—" }
-              - { label: "Agency",     name: "agency",     widget: "string", required: false, default: "—" }
+                field: { label: "이미지", name: "image", widget: "image" }
+              - { label: "설명", name: "description", widget: "text", required: false, default: "" }
+              - { label: "Client", name: "client", widget: "string", required: false, default: "—" }
+              - { label: "Agency", name: "agency", widget: "string", required: false, default: "—" }
               - { label: "Production", name: "production", widget: "string", required: false, default: "CUVE" }
-              - { label: "Director",   name: "director",   widget: "string", required: false, default: "—" }
-              - { label: "Sound",      name: "sound",      widget: "string", required: false, default: "—" }
+              - { label: "Director", name: "director", widget: "string", required: false, default: "—" }
+              - { label: "Sound", name: "sound", widget: "string", required: false, default: "—" }
+
+  - name: "apps"
+    label: "📱 앱 관리"
+    files:
+      - label: "앱 목록"
+        name: "apps"
+        file: "data/apps.json"
+        fields:
+          - label: "앱 목록"
+            name: "apps"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "ID", name: "id", widget: "number", value_type: "int" }
+              - { label: "앱 이름", name: "title", widget: "string" }
+              - { label: "한 줄 소개", name: "subtitle", widget: "string", required: false }
+              - { label: "앱 아이콘", name: "icon", widget: "image", required: false }
+              - label: "스크린샷"
+                name: "screenshots"
+                widget: "list"
+                required: false
+                field: { label: "스크린샷", name: "screenshot", widget: "image" }
+              - { label: "앱 설명", name: "description", widget: "text", required: false }
+              - { label: "카테고리", name: "category", widget: "string", required: false, default: "Creative Tools" }
+              - label: "플랫폼"
+                name: "platform"
+                widget: "select"
+                multiple: true
+                options:
+                  - { label: "Android", value: "android" }
+                  - { label: "iOS", value: "ios" }
+                  - { label: "Web", value: "web" }
+              - label: "링크"
+                name: "links"
+                widget: "object"
+                fields:
+                  - { label: "Google Play URL", name: "playstore", widget: "string", required: false, default: "" }
+                  - { label: "App Store URL", name: "appstore", widget: "string", required: false, default: "" }
+                  - { label: "Website URL", name: "website", widget: "string", required: false, default: "" }
+              - { label: "출시 연도", name: "year", widget: "number", value_type: "int", required: false }

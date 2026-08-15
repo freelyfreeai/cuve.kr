@@ -417,6 +417,114 @@
   .gallery-description::-webkit-scrollbar { width: 3px; }
   .gallery-description::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+  /* ── APPS PAGE ── */
+  .apps-page { padding: 48px 48px 80px; max-width: 1280px; margin: 0 auto; }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .app-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 28px 24px;
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .app-card:hover {
+    border-color: rgba(200,0,107,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(200,0,107,0.08);
+  }
+
+  .app-icon-wrap {
+    width: 76px; height: 76px; border-radius: 18px;
+    background: var(--bg3); border: 1px solid var(--border);
+    overflow: hidden; margin-bottom: 20px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .app-icon-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .app-icon-placeholder { font-size: 32px; }
+
+  .app-card-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--text); letter-spacing: 0.03em; margin-bottom: 8px;
+  }
+  .app-card-sub {
+    font-size: 13px; color: var(--text-dim); line-height: 1.6;
+    flex: 1; margin-bottom: 20px;
+  }
+  .app-card-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 16px; }
+
+  .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .platform-badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 3px; border: 1px solid var(--border); color: var(--text-muted);
+  }
+  .platform-badge.android { border-color: rgba(61,220,132,0.5); color: #3ddc84; }
+  .platform-badge.ios     { border-color: rgba(180,180,180,0.4); color: #aaa; }
+  .platform-badge.web     { border-color: rgba(14,165,233,0.4); color: var(--blue); }
+
+  .app-store-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .app-store-btn {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 7px 14px; border: 1px solid var(--border); color: var(--text-dim);
+    border-radius: 4px; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .app-store-btn:hover { border-color: var(--accent); color: var(--text); }
+  .app-store-btn.primary {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .app-store-btn.primary:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+
+  /* App Modal */
+  .app-modal-header {
+    display: flex; gap: 22px; align-items: center; margin-bottom: 28px;
+  }
+  .app-modal-icon-wrap {
+    width: 84px; height: 84px; min-width: 84px; border-radius: 20px;
+    background: var(--bg3); border: 1px solid var(--border);
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+  }
+  .app-modal-icon-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .app-modal-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 30px; font-weight: 700; color: var(--text);
+    letter-spacing: 0.04em; margin-bottom: 4px;
+  }
+  .app-modal-subtitle { font-size: 13px; color: var(--text-dim); margin-bottom: 10px; }
+
+  .app-modal-links {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);
+  }
+  .app-modal-link-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 12px 24px; border: 1px solid var(--border);
+    color: var(--text-dim); border-radius: 4px; text-decoration: none;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .app-modal-link-btn:hover { border-color: var(--accent); color: var(--text); }
+  .app-modal-link-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .app-modal-link-btn.primary:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+
+  @media (max-width: 900px) {
+    .apps-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 580px) {
+    .apps-grid { grid-template-columns: 1fr; }
+    .app-modal-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+  }
+
   /* still 타입 배지 */
   .work-type-badge {
     position: absolute; top: 12px; right: 12px;
@@ -498,6 +606,7 @@
   <nav>
     <button class="nav-link active" id="nav-about" onclick="showPage('about')">About</button>
     <button class="nav-link" id="nav-works" onclick="showPage('works')">Works</button>
+    <button class="nav-link" id="nav-apps"  onclick="showPage('apps')">Apps</button>
     <button class="nav-link" id="nav-contact" onclick="goToContact()">Contact Us</button>
   </nav>
 </header>
@@ -706,6 +815,17 @@
     </footer>
   </div>
 
+  <!-- ░░░░ APPS PAGE ░░░░ -->
+  <div class="page" id="page-apps">
+    <div class="apps-page">
+      <div class="apps-grid" id="apps-grid"></div>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-logo">CUVE.</div>
+      <span class="footer-copy">© <span class="copy-year">2026</span> CUVE. ALL RIGHTS RESERVED.</span>
+    </footer>
+  </div>
+
 </main>
 
 <!-- ░░ MODAL ░░ -->
@@ -738,8 +858,41 @@
       <div class="gallery-description" id="gallery-description" style="display:none"></div>
     </div>
 
-    <!-- ── 크레딧 (공통) ── -->
-    <div class="modal-info">
+    <!-- ── 앱 모드 ── -->
+    <div id="modal-app-section" style="display:none">
+      <div class="app-modal-header">
+        <div class="app-modal-icon-wrap">
+          <img id="app-modal-icon" src="" alt="" style="display:none">
+          <span id="app-modal-icon-placeholder">📱</span>
+        </div>
+        <div>
+          <div id="app-modal-title" class="app-modal-title"></div>
+          <div id="app-modal-subtitle" class="app-modal-subtitle"></div>
+          <div id="app-modal-platforms" class="app-platforms"></div>
+        </div>
+      </div>
+
+      <!-- 스크린샷 갤러리 (이미지 없으면 숨김) -->
+      <div id="app-gallery-area">
+        <div class="gallery-wrap" id="app-gallery-wrap">
+          <button class="gallery-arrow gallery-prev" onclick="appGalleryNav(-1)">&#8592;</button>
+          <img id="app-gallery-img" src="" alt="" class="gallery-main-img">
+          <button class="gallery-arrow gallery-next" onclick="appGalleryNav(1)">&#8594;</button>
+        </div>
+        <div class="gallery-footer">
+          <span class="gallery-counter">
+            <span id="app-gallery-cur">1</span> / <span id="app-gallery-tot">1</span>
+          </span>
+          <div class="gallery-dots" id="app-gallery-dots"></div>
+        </div>
+      </div>
+
+      <div id="app-modal-description" class="gallery-description" style="display:none; margin-top:16px; border-top:1px solid var(--border); padding-top:18px;"></div>
+      <div id="app-modal-links" class="app-modal-links" style="display:none"></div>
+    </div>
+
+    <!-- ── 크레딧 (영상/스틸 공통) ── -->
+    <div class="modal-info" id="modal-credits">
       <div class="info-block"><label>Client</label><span id="m-client">—</span></div>
       <div class="info-block"><label>Agency</label><span id="m-agency">—</span></div>
       <div class="info-block"><label>Production</label><span id="m-production">—</span></div>
@@ -766,6 +919,7 @@ const CATEGORIES = ["All","Media Arts","Commercial","Animation","AR/VR","A.i","L
 
 let REEL_DATA = [];
 let WORKS_DATA = [];
+let APPS_DATA  = [];
 let currentCategory = "All";
 
 /* ─────────────────────────────────────────────
@@ -773,18 +927,22 @@ let currentCategory = "All";
 ───────────────────────────────────────────── */
 async function loadData() {
   try {
-    const [reelsRes, worksRes] = await Promise.all([
+    const [reelsRes, worksRes, appsRes] = await Promise.all([
       fetch('/data/reels.json?v=' + Date.now()),
-      fetch('/data/works.json?v=' + Date.now())
+      fetch('/data/works.json?v=' + Date.now()),
+      fetch('/data/apps.json?v='  + Date.now())
     ]);
     const reelsData = await reelsRes.json();
     const worksData = await worksRes.json();
-    REEL_DATA  = reelsData.reels  || [];
-    WORKS_DATA = worksData.works  || [];
+    const appsData  = await appsRes.json();
+    REEL_DATA  = reelsData.reels || [];
+    WORKS_DATA = worksData.works || [];
+    APPS_DATA  = appsData.apps   || [];
   } catch (e) {
     console.warn('JSON 로드 실패 — 기본 데이터 사용:', e);
     REEL_DATA  = [{ year: 2026, youtubeId: "dQw4w9WgXcQ" }];
     WORKS_DATA = [];
+    APPS_DATA  = [];
   }
 }
 
@@ -958,6 +1116,11 @@ function closeModal() {
   document.body.style.overflow = '';
   galleryImages = [];
   galleryIndex  = 0;
+  appGalleryImages = [];
+  appGalleryIndex  = 0;
+  // 크레딧 패널 원복
+  const credits = document.getElementById('modal-credits');
+  if (credits) credits.style.display = '';
 }
 
 /* ─────────────────────────────────────────────
@@ -1015,7 +1178,12 @@ function handleBackdropClick(e) { if (e.target.id === 'modal-backdrop') closeMod
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
   const isOpen = document.getElementById('modal-backdrop').classList.contains('open');
-  if (isOpen && galleryImages.length > 1) {
+  if (!isOpen) return;
+  const appSec = document.getElementById('modal-app-section');
+  if (appSec && appSec.style.display !== 'none') {
+    if (e.key === 'ArrowLeft')  appGalleryNav(-1);
+    if (e.key === 'ArrowRight') appGalleryNav(1);
+  } else if (galleryImages.length > 1) {
     if (e.key === 'ArrowLeft')  galleryNav(-1);
     if (e.key === 'ArrowRight') galleryNav(1);
   }
@@ -1057,6 +1225,159 @@ function handleFormSubmit(e) {
 }
 
 /* ─────────────────────────────────────────────
+   APPS
+───────────────────────────────────────────── */
+function renderAppsGrid() {
+  const grid = document.getElementById('apps-grid');
+  if (!APPS_DATA.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">NO APPS YET</div>';
+    return;
+  }
+
+  grid.innerHTML = APPS_DATA.map(app => {
+    const iconHtml = app.icon && app.icon.trim()
+      ? `<img src="${app.icon}" alt="${app.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        + `<span class="app-icon-placeholder" style="display:none">📱</span>`
+      : `<span class="app-icon-placeholder">📱</span>`;
+
+    const platforms = (app.platform || []).map(p =>
+      `<span class="platform-badge ${p}">${p === 'android' ? 'Android' : p === 'ios' ? 'iOS' : p === 'web' ? 'Web' : p}</span>`
+    ).join('');
+
+    const storeLinks = [];
+    if (app.links?.playstore) storeLinks.push(
+      `<a href="${app.links.playstore}" target="_blank" onclick="event.stopPropagation()" class="app-store-btn primary">▶ Play</a>`);
+    if (app.links?.appstore)  storeLinks.push(
+      `<a href="${app.links.appstore}"  target="_blank" onclick="event.stopPropagation()" class="app-store-btn">⬡ App Store</a>`);
+    if (app.links?.website)   storeLinks.push(
+      `<a href="${app.links.website}"   target="_blank" onclick="event.stopPropagation()" class="app-store-btn">↗ Website</a>`);
+
+    return `
+      <div class="app-card" onclick="openAppModal(${app.id})">
+        <div class="app-icon-wrap">${iconHtml}</div>
+        <div class="app-card-title">${app.title}</div>
+        <div class="app-card-sub">${app.subtitle || ''}</div>
+        <hr class="app-card-divider">
+        <div class="app-platforms">${platforms}</div>
+        <div class="app-store-links">${storeLinks.join('')}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ─────────────────────────────────────────────
+   APP GALLERY
+───────────────────────────────────────────── */
+let appGalleryImages = [];
+let appGalleryIndex  = 0;
+
+function initAppGallery(images) {
+  appGalleryImages = images || [];
+  appGalleryIndex  = 0;
+  const total = appGalleryImages.length;
+  const area  = document.getElementById('app-gallery-area');
+
+  if (total === 0) { area.style.display = 'none'; return; }
+  area.style.display = 'block';
+
+  document.getElementById('app-gallery-tot').textContent = total;
+
+  const dotsEl = document.getElementById('app-gallery-dots');
+  dotsEl.innerHTML = total > 1
+    ? appGalleryImages.map((_, i) =>
+        `<button class="gallery-dot${i === 0 ? ' active' : ''}" onclick="setAppGallerySlide(${i})"></button>`
+      ).join('')
+    : '';
+
+  const wrap = document.getElementById('app-gallery-wrap');
+  wrap.querySelector('.gallery-prev').style.display = total > 1 ? 'flex' : 'none';
+  wrap.querySelector('.gallery-next').style.display = total > 1 ? 'flex' : 'none';
+
+  setAppGallerySlide(0, true);
+}
+
+function setAppGallerySlide(index, instant) {
+  if (!appGalleryImages.length) return;
+  if (index < 0) index = appGalleryImages.length - 1;
+  if (index >= appGalleryImages.length) index = 0;
+  appGalleryIndex = index;
+
+  const img = document.getElementById('app-gallery-img');
+  if (instant) {
+    img.src = appGalleryImages[index];
+  } else {
+    img.style.opacity = '0';
+    setTimeout(() => { img.src = appGalleryImages[index]; img.style.opacity = '1'; }, 160);
+  }
+
+  document.getElementById('app-gallery-cur').textContent = index + 1;
+  document.querySelectorAll('#app-gallery-dots .gallery-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+function appGalleryNav(dir) { setAppGallerySlide(appGalleryIndex + dir); }
+
+/* ─────────────────────────────────────────────
+   OPEN APP MODAL
+───────────────────────────────────────────── */
+function openAppModal(id) {
+  const app = APPS_DATA.find(a => a.id === id);
+  if (!app) return;
+
+  // 섹션 전환
+  document.getElementById('modal-video-section').style.display = 'none';
+  document.getElementById('modal-still-section').style.display = 'none';
+  document.getElementById('modal-app-section').style.display   = 'block';
+  document.getElementById('modal-credits').style.display       = 'none';
+
+  // 아이콘
+  const iconImg         = document.getElementById('app-modal-icon');
+  const iconPlaceholder = document.getElementById('app-modal-icon-placeholder');
+  if (app.icon && app.icon.trim()) {
+    iconImg.src = app.icon;
+    iconImg.style.display         = 'block';
+    iconPlaceholder.style.display = 'none';
+  } else {
+    iconImg.style.display         = 'none';
+    iconPlaceholder.style.display = 'block';
+  }
+
+  // 헤더 텍스트
+  document.getElementById('app-modal-title').textContent    = app.title    || '';
+  document.getElementById('app-modal-subtitle').textContent = app.subtitle || '';
+
+  // 플랫폼 배지
+  document.getElementById('app-modal-platforms').innerHTML =
+    (app.platform || []).map(p =>
+      `<span class="platform-badge ${p}">${p === 'android' ? 'Android' : p === 'ios' ? 'iOS' : p === 'web' ? 'Web' : p}</span>`
+    ).join('');
+
+  // 스크린샷
+  initAppGallery(app.screenshots || []);
+
+  // 설명
+  const descEl = document.getElementById('app-modal-description');
+  if (app.description && app.description.trim()) {
+    descEl.textContent = app.description;
+    descEl.style.display = 'block';
+  } else {
+    descEl.style.display = 'none';
+  }
+
+  // 링크
+  const linksEl = document.getElementById('app-modal-links');
+  const linkItems = [];
+  if (app.links?.playstore) linkItems.push(`<a href="${app.links.playstore}" target="_blank" class="app-modal-link-btn primary">▶ Google Play</a>`);
+  if (app.links?.appstore)  linkItems.push(`<a href="${app.links.appstore}"  target="_blank" class="app-modal-link-btn">⬡ App Store</a>`);
+  if (app.links?.website)   linkItems.push(`<a href="${app.links.website}"   target="_blank" class="app-modal-link-btn">↗ Website</a>`);
+  linksEl.innerHTML     = linkItems.join('');
+  linksEl.style.display = linkItems.length ? 'flex' : 'none';
+
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ─────────────────────────────────────────────
    INIT
 ───────────────────────────────────────────── */
 document.querySelectorAll('.copy-year').forEach(el => { el.textContent = new Date().getFullYear(); });
@@ -1066,6 +1387,7 @@ async function init() {
   buildReelSection();
   buildCatFilter();
   renderWorksGrid();
+  renderAppsGrid();
 
   setTimeout(() => {
     const loader = document.getElementById('loader');

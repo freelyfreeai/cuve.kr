@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "id": 1,
+      "title": "CUVE Motion",
+      "subtitle": "AI 기반 모션그래픽 생성 도구. 누구나 쉽게 프로 수준의 모션을 만들 수 있습니다.",
+      "icon": "",
+      "screenshots": [],
+      "description": "CUVE Motion은 AI를 활용하여 누구나 쉽게 모션그래픽을 제작할 수 있는 크리에이티브 툴입니다.\n\n주요 기능\n• AI 기반 모션 자동 생성\n• 100여 종의 프리미엄 템플릿\n• 4K 영상 출력 지원\n• 직관적인 타임라인 인터페이스\n• 실시간 미리보기\n\n이 앱은 샘플 예시입니다. 어드민 패널에서 실제 앱 정보로 수정해주세요.",
+      "category": "Creative Tools",
+      "platform": ["android", "ios"],
+      "links": {
+        "playstore": "https://play.google.com/store",
+        "appstore": "https://apps.apple.com",
+        "website": ""
+      },
+      "year": 2026
+    }
+  ]
+}
