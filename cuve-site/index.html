@@ -1414,7 +1414,7 @@ window.addEventListener('popstate', function(e) {
 
 // Init page from URL on load
 (function() {
-  const path = window.location.pathname.replace(/^//, '') || 'about';
+  const path = window.location.pathname.substring(1) || 'about';
   const validPages = ['about', 'works', 'apps'];
   const pageId = validPages.includes(path) ? path : 'about';
   if (pageId !== 'about') showPage(pageId, false);
