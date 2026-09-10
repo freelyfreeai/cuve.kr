@@ -30,6 +30,21 @@
       "year": 2013,
       "category": "Commercial",
       "youtubeId": "i--dC8RY388"
+    },
+    {
+      "agency": "CUVE",
+      "client": "DAUM",
+      "director": "MrFreely",
+      "sound": "CraveSound",
+      "title": "Daum Gstar Trailer | 다음게임 GStar 트레일러 영상",
+      "images": [],
+      "production": "CUVE",
+      "type": "video",
+      "id": 2,
+      "description": "Daum Gstar Trailer | 다음게임 GStar 트레일러 영상",
+      "year": 2015,
+      "category": "Commercial",
+      "youtubeId": "2trC9q-O3Uk"
     }
   ]
 }
