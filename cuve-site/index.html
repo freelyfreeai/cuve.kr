@@ -1031,9 +1031,10 @@ function buildCatFilter() {
 
 function renderWorksGrid() {
   const grid = document.getElementById('works-grid');
-  const filtered = currentCategory === 'All'
-    ? WORKS_DATA
-    : WORKS_DATA.filter(w => w.category === currentCategory);
+  const filtered = (currentCategory === 'All'
+    ? [...WORKS_DATA]
+    : WORKS_DATA.filter(w => w.category === currentCategory))
+    .sort((a, b) => b.year - a.year || b.id - a.id);
 
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="empty-state">NO WORKS IN THIS CATEGORY YET</div>';
