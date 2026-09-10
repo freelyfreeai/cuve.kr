@@ -1,5 +1,20 @@
-{ "works": [
-  { "id":1,"type":"video","title":"Brand Film — Sample","category":"Commercial","year":2026,"youtubeId":"dQw4w9WgXcQ","thumbnail":"https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg","images":[],"description":"","client":"Sample Client","agency":"—","production":"CUVE","director":"—","sound":"—" },
-  { "id":2,"type":"video","title":"Media Facade — Sample","category":"Media Arts","year":2026,"youtubeId":"dQw4w9WgXcQ","thumbnail":"https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg","images":[],"description":"","client":"—","agency":"—","production":"CUVE","director":"—","sound":"—" },
-  { "id":3,"type":"still","title":"Brand Identity — Sample (스틸)","category":"Commercial","year":2026,"youtubeId":"","thumbnail":"","images":[],"description":"스틸컷 포트폴리오 샘플입니다. 어드민에서 수정하세요.","client":"—","agency":"—","production":"CUVE","director":"—","sound":"—" }
-] }
+{
+  "works": [
+    {
+      "agency": "Cheil Worldwide",
+      "client": "CJ E&M",
+      "thumbnail": "/images/16_9_비율로_확장해줘_2k_20260910171813.jpeg",
+      "director": "GiantStep",
+      "sound": "GiantStep",
+      "title": " CJ E&M Promotion Film | CJ E&M 기업 홍보영상 제작",
+      "images": [],
+      "production": "CUVE & GiantStep",
+      "type": "video",
+      "id": 0,
+      "description": "CJ E&M Promotion Film  |  CJ E&M 기업 홍보영상 제작",
+      "year": 2012,
+      "category": "Commercial",
+      "youtubeId": "pHXvfVBRWKc"
+    }
+  ]
+}
