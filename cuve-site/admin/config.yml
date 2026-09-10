@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images"
+media_folder: "cuve-site/images"
 public_folder: "/images"
 editor:
   preview: false
@@ -14,7 +14,7 @@ collections:
     files:
       - label: "쇼릴 목록"
         name: "reels"
-        file: "data/reels.json"
+        file: "cuve-site/data/reels.json"
         fields:
           - label: "쇼릴 목록"
             name: "reels"
@@ -29,7 +29,7 @@ collections:
     files:
       - label: "작품 목록"
         name: "works"
-        file: "data/works.json"
+        file: "cuve-site/data/works.json"
         fields:
           - label: "작품 목록"
             name: "works"
@@ -76,7 +76,7 @@ collections:
     files:
       - label: "앱 목록"
         name: "apps"
-        file: "data/apps.json"
+        file: "cuve-site/data/apps.json"
         fields:
           - label: "앱 목록"
             name: "apps"
