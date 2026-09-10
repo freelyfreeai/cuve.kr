@@ -951,7 +951,7 @@ async function loadData() {
 /* ─────────────────────────────────────────────
    PAGE NAVIGATION
 ───────────────────────────────────────────── */
-function showPage(pageId) {
+function showPage(pageId, pushState = true) {
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active');
     p.style.display = 'none';
@@ -967,6 +967,12 @@ function showPage(pageId) {
   const nav = document.getElementById('nav-' + pageId);
   if (nav) nav.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Update URL
+  if (pushState) {
+    const path = pageId === 'about' ? '/' : '/' + pageId;
+    history.pushState({ pageId }, '', path);
+  }
 }
 
 function goToContact() {
@@ -1399,6 +1405,21 @@ async function init() {
   }, 900);
 }
 init();
+
+// Handle browser back/forward
+window.addEventListener('popstate', function(e) {
+  const pageId = e.state?.pageId || 'about';
+  showPage(pageId, false);
+});
+
+// Init page from URL on load
+(function() {
+  const path = window.location.pathname.replace(/^//, '') || 'about';
+  const validPages = ['about', 'works', 'apps'];
+  const pageId = validPages.includes(path) ? path : 'about';
+  if (pageId !== 'about') showPage(pageId, false);
+})();
+
 </script>
 </body>
 </html>
