@@ -447,22 +447,22 @@
   .app-card-info {
     display: flex;
     flex-direction: column;
-    padding: 32px 28px 24px;
-    width: 280px;
+    padding: 18px 22px 16px;
+    width: 260px;
     flex-shrink: 0;
-    align-self: center;
   }
   .app-card-banner {
     flex: 1;
     min-width: 0;
     overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
   .app-card-banner img {
     width: 100%;
     height: auto;
     display: block;
+    flex-shrink: 0;
   }
   .app-card-banner-empty {
     width: 100%;
@@ -475,9 +475,9 @@
   }
 
   .app-icon-wrap {
-    width: 76px; height: 76px; border-radius: 18px;
+    width: 60px; height: 60px; border-radius: 14px;
     background: var(--bg3); border: 1px solid var(--border);
-    overflow: hidden; margin-bottom: 20px; flex-shrink: 0;
+    overflow: hidden; margin-bottom: 12px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
   }
   .app-icon-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -485,16 +485,16 @@
 
   .app-card-title {
     font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 22px; font-weight: 700;
-    color: var(--text); letter-spacing: 0.03em; margin-bottom: 8px;
+    font-size: 20px; font-weight: 700;
+    color: var(--text); letter-spacing: 0.03em; margin-bottom: 4px;
   }
   .app-card-sub {
-    font-size: 13px; color: var(--text-dim); line-height: 1.6;
-    flex: 1; margin-bottom: 20px;
+    font-size: 12px; color: var(--text-dim); line-height: 1.5;
+    flex: 1; margin-bottom: 12px;
   }
-  .app-card-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 16px; }
+  .app-card-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 10px; }
 
-  .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .app-platforms { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
   .platform-badge {
     font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     padding: 3px 9px; border-radius: 3px; border: 1px solid var(--border); color: var(--text-muted);
