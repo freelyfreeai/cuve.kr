@@ -336,8 +336,9 @@
   ═══════════════════════════════════════════ */
   .modal-backdrop {
     position: fixed; inset: 0; background: rgba(5,5,5,0.96); z-index: 800;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: flex-start; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 40px;
+    overflow-y: auto;
   }
   .modal-backdrop.open { opacity: 1; pointer-events: all; }
   .modal-inner { width: 100%; max-width: 920px; position: relative; transform: translateY(20px); transition: transform 0.35s ease; }
@@ -413,7 +414,7 @@
     margin-top: 20px; font-size: 14px; line-height: 1.8;
     color: var(--text-dim); white-space: pre-wrap;
     border-top: 1px solid var(--border); padding-top: 18px;
-    max-height: 140px; overflow-y: auto; padding-right: 6px;
+    padding-right: 6px;
   }
   .gallery-description::-webkit-scrollbar { width: 3px; }
   .gallery-description::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -947,7 +948,7 @@
 /* ─────────────────────────────────────────────
    CATEGORIES
 ───────────────────────────────────────────── */
-const CATEGORIES = ["All","Media Arts","Commercial","Animation","AR/VR","A.i","LiveAction"];
+const CATEGORIES = ["All","Media Arts","Commercial","Animation","AR/VR/Interactive","A.i","LiveAction","OAP Title"];
 
 let REEL_DATA = [];
 let WORKS_DATA = [];
