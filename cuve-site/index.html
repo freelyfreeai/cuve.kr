@@ -676,6 +676,49 @@
     nav { gap: 18px; }
     .nav-link { font-size: 10px; }
     .reel-title { font-size: 36px; }
+
+    /* Works: show all categories (wrap) */
+    .works-page, .apps-page {
+      padding-left: 16px; padding-right: 16px; padding-top: 28px;
+    }
+    .cat-bar {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      gap: 4px 0;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-btn {
+      padding: 8px 12px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      border-bottom: none;
+      margin-bottom: 0;
+      border-radius: 4px;
+    }
+    .cat-btn:first-child { padding-left: 12px; }
+    .cat-btn.active {
+      background: rgba(200,0,107,0.18);
+      color: var(--accent-hi);
+      border-bottom-color: transparent;
+    }
+
+    /* Apps: vertical stack (info top, thumbnail bottom) */
+    .app-card { flex-direction: column; }
+    .app-card-info { width: 100%; padding: 18px 16px 14px; }
+    .app-card-banner {
+      width: 100%;
+      height: 200px;
+      max-height: 200px;
+      flex-shrink: 0;
+    }
+    .app-card-banner img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .app-card-banner-empty { height: 200px; }
   }
 </style>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <script>   if (window.netlifyIdentity) {     window.netlifyIdentity.on("init", function(user) {       if (!user) {         window.netlifyIdentity.on("login", function() {           document.location.href = "/admin/";         });       }     });   } </script> </head>
