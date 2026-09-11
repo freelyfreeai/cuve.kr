@@ -591,13 +591,13 @@
       "client": "PortKids",
       "director": "MrFreely",
       "sound": "GoldenRecord",
-      "title": "원더밍 1-1 | 슈퍼 히어로의 등장! 원더밍과 친구들",
+      "title": "원더밍 1화 전체 | 슈퍼 히어로의 등장! 원더밍과 친구들",
       "images": [],
       "production": "CUVE",
       "type": "video",
       "id": 39,
-      "description": "원더밍 1-1 | 슈퍼 히어로의 등장! 원더밍과 친구들\n원더밍과 친구들 애니메이션 총괄제작 및 제작 진행. ",
-      "year": 2022,
+      "description": "원더밍 1화 전체 | 슈퍼 히어로의 등장! 원더밍과 친구들\n원더밍과 친구들 애니메이션 총괄제작 및 제작 진행. ",
+      "year": 2024,
       "category": "Animation",
       "youtubeId": "_DFHWPICY58"
     },
@@ -606,15 +606,30 @@
       "client": "PortKids",
       "director": "MrFreely",
       "sound": "GoldenRecords",
-      "title": "원더밍 1-2 | 떨어졌어요?! 절벽 아래는 어떨까?",
+      "title": "원더밍 2화 전체 | 나도 빨리 달리고 싶어!🏃‍♀️🏃",
       "images": [],
       "production": "CUVE",
       "type": "video",
       "id": 40,
-      "description": "원더밍 1-2 | 떨어졌어요?! 절벽 아래는 어떨까?\n원더밍과 친구들 애니메이션 총괄진행.",
-      "year": 2022,
+      "description": "원더밍 2화 전체 | 나도 빨리 달리고 싶어!🏃‍♀️🏃\n원더밍과 친구들 애니메이션 총괄진행.",
+      "year": 2024,
       "category": "Animation",
-      "youtubeId": "OpEX74PAc0A"
+      "youtubeId": "30syk7mvzOI"
+    },
+    {
+      "agency": "RabbitWalks",
+      "client": "PortKids",
+      "director": "MrFreely",
+      "sound": "GoldenRecords",
+      "title": "원더밍 3화 전체 | 무궁화 꽃이 피었습니다!",
+      "images": [],
+      "production": "CUVE",
+      "type": "video",
+      "id": 41,
+      "description": "원더밍 3화 전체 | 무궁화 꽃이 피었습니다!\n원더밍과 친구들의 애니메이션 총괄제작 진행 및 제작.",
+      "year": 2024,
+      "category": "Animation",
+      "youtubeId": "cpKuJMjEZL8"
     }
   ]
 }
