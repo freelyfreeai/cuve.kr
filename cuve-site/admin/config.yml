@@ -52,9 +52,10 @@ collections:
                   - { label: "Media Arts", value: "Media Arts" }
                   - { label: "Commercial", value: "Commercial" }
                   - { label: "Animation", value: "Animation" }
-                  - { label: "AR/VR", value: "AR/VR" }
+                  - { label: "AR/VR/Interactive", value: "AR/VR/Interactive" }
                   - { label: "A.i", value: "A.i" }
                   - { label: "LiveAction", value: "LiveAction" }
+                  - { label: "OAP Title", value: "OAP Title" }
               - { label: "제작 연도", name: "year", widget: "number", value_type: "int" }
               - { label: "유튜브 ID", name: "youtubeId", widget: "string", required: false, default: "" }
               - { label: "대표 썸네일", name: "thumbnail", widget: "image", required: false }
