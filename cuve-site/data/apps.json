@@ -1,20 +1,23 @@
 {
   "apps": [
     {
-      "id": 1,
-      "title": "CUVE Motion",
-      "subtitle": "AI 기반 모션그래픽 생성 도구. 누구나 쉽게 프로 수준의 모션을 만들 수 있습니다.",
-      "icon": "",
       "screenshots": [],
-      "description": "CUVE Motion은 AI를 활용하여 누구나 쉽게 모션그래픽을 제작할 수 있는 크리에이티브 툴입니다.\n\n주요 기능\n• AI 기반 모션 자동 생성\n• 100여 종의 프리미엄 템플릿\n• 4K 영상 출력 지원\n• 직관적인 타임라인 인터페이스\n• 실시간 미리보기\n\n이 앱은 샘플 예시입니다. 어드민 패널에서 실제 앱 정보로 수정해주세요.",
-      "category": "Creative Tools",
-      "platform": ["android", "ios"],
+      "platform": [
+        "android",
+        "ios"
+      ],
+      "subtitle": "키캡을 누르는 손맛과 사운드, 조명, 테마를 즐기는 감성 키캡 탭 게임",
+      "title": "키팝 KEYPOP",
+      "icon": "",
       "links": {
         "playstore": "https://play.google.com/store",
         "appstore": "https://apps.apple.com",
         "website": ""
       },
-      "year": 2026
+      "id": 1,
+      "description": "🎹✨ KEYPOP ✨🎹\n\n키캡을 누르는 손맛과 사운드, 조명, 테마를 즐기는 감성 키캡 탭 게임\n키캡을 누르며 타건 횟수를 쌓고, CP를 모으는 재미까지!\n\nCP를 모아서 다양한 키캡 디자인 · 사운드 · 라이트 효과 · UI 테마를 잠금 해제해서 내 것으로 만드세요! 🔓🎨\n\nGoogle 계정으로 로그인하면 기록이 안전하게 보관되고 랭킹에도 참여할 수 있어요.\n\n게스트로도 바로 플레이 가능합니다 👤💾\n\n📌 주요 기능\n\n👆 키캡을 누르는 직관적인 탭 플레이\n\n🎨 키캡 디자인 / 사운드 / 조명 / 테마 커스터마이징\n\n🔊 볼륨 · 피치 · 햅틱 등 감각 설정\n\n🏆 Google 로그인 기반 기록 저장 & 랭킹 참여\n\n🎮 게스트 플레이 지원\n\n📊 랭킹 시스템\nKEYPOP에서 나만의 키캡 감성을 즐기면서 랭킹에 도전해보세요 🚀⌨️💖",
+      "year": 2026,
+      "category": "APP"
     }
   ]
 }
