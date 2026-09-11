@@ -436,7 +436,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    min-height: 220px;
+    align-items: stretch;
   }
   .app-card:hover {
     border-color: rgba(200,0,107,0.5);
@@ -450,22 +450,19 @@
     padding: 32px 28px 24px;
     width: 280px;
     flex-shrink: 0;
+    align-self: center;
   }
   .app-card-banner {
     flex: 1;
     min-width: 0;
     overflow: hidden;
-    background: var(--bg3);
     display: flex;
-    align-items: stretch;
+    align-items: center;
   }
   .app-card-banner img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+    height: auto;
     display: block;
-    background: var(--bg3);
   }
   .app-card-banner-empty {
     width: 100%;
