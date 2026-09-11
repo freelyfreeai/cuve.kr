@@ -1,14 +1,16 @@
 {
   "apps": [
     {
-      "screenshots": [],
+      "screenshots": [
+        "/images/graphic-image-1024.jpg"
+      ],
       "platform": [
         "android",
         "ios"
       ],
       "subtitle": "키캡을 누르는 손맛과 사운드, 조명, 테마를 즐기는 감성 키캡 탭 게임",
       "title": "키팝 KEYPOP",
-      "icon": "",
+      "icon": "/images/55dd7188-4062-47d7-b2ed-62393b000fea.png",
       "links": {
         "playstore": "https://play.google.com/store",
         "appstore": "https://apps.apple.com",
