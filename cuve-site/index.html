@@ -124,6 +124,65 @@
   .nav-link.active::after { width: 100%; }
 
   /* ═══════════════════════════════════════════
+     MOBILE NAV
+  ═══════════════════════════════════════════ */
+  .nav-hamburger {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    .logo { left: 20px; }
+    nav {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0; right: 0;
+      background: rgba(5,5,5,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 12px 0 20px;
+      border-bottom: 1px solid var(--border);
+      z-index: 499;
+    }
+    nav.mobile-open { display: flex; }
+    nav .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+    }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ═══════════════════════════════════════════
      PAGE SYSTEM
   ═══════════════════════════════════════════ */
   main { padding-top: var(--header-h); min-height: 100vh; position: relative; z-index: 1; }
@@ -642,6 +701,9 @@
     <a class="nav-link" href="http://www.cuvelab.kr" target="_blank" style="text-decoration:none;">LAB</a>
     <button class="nav-link" id="nav-contact" onclick="goToContact()">Contact Us</button>
   </nav>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
 </header>
 
 <main>
@@ -945,6 +1007,25 @@
 </form>
 
 <script>
+/* ─────────────────────────────────────────────
+   MOBILE NAV HAMBURGER
+───────────────────────────────────────────── */
+(function() {
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileNav = document.querySelector('header nav');
+  if (!hamburger || !mobileNav) return;
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('mobile-open');
+  });
+  mobileNav.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('mobile-open');
+    });
+  });
+})();
+
 /* ─────────────────────────────────────────────
    CATEGORIES
 ───────────────────────────────────────────── */
