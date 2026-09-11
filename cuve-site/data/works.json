@@ -345,6 +345,21 @@
       "year": 2022,
       "category": "LiveAction",
       "youtubeId": "X61Hbb0IPug"
+    },
+    {
+      "agency": "Rabbit Walks",
+      "client": "Samsung",
+      "director": "MrFreely",
+      "sound": "JavaSound",
+      "title": "Samsung NEO QLED SmartThings Animation",
+      "images": [],
+      "production": "CUVE",
+      "type": "video",
+      "id": 23,
+      "description": "QLED 8K: SmartThings, Your best home butler I Samsung",
+      "year": 2022,
+      "category": "Animation",
+      "youtubeId": "K28eZCNk6Kw"
     }
   ]
 }
